@@ -1,9 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import Image from "next/image";
 import { useEffect, useState } from "react";
-import { FaArrowDown } from "react-icons/fa";
 
 const HeroSection = () => {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -11,13 +9,6 @@ const HeroSection = () => {
   useEffect(() => {
     setIsLoaded(true);
   }, []);
-
-  const scrollToAbout = () => {
-    const aboutSection = document.getElementById("about");
-    if (aboutSection) {
-      aboutSection.scrollIntoView({ behavior: "smooth" });
-    }
-  };
 
   // Animation variants
   const containerVariants = {
@@ -40,36 +31,71 @@ const HeroSection = () => {
     },
   };
 
+  const floatingAnimation = {
+    animate: {
+      y: [0, -10, 0],
+      transition: {
+        duration: 4,
+        repeat: Infinity,
+        ease: "easeInOut",
+      },
+    },
+  };
+
   return (
     <section className="relative h-screen flex items-center justify-center overflow-hidden">
-      {/* Animated background gradient */}
-      <div className="absolute inset-0 bg-gradient-to-b from-primary via-primary/90 to-primary/80 z-0">
-        {/* Optional particle or animated overlay effect */}
-        <div className="absolute inset-0 opacity-20">
-          <div className="absolute w-96 h-96 -top-48 -left-48 bg-secondary rounded-full blur-3xl animate-pulse"></div>
-          <div
-            className="absolute w-96 h-96 -bottom-48 -right-48 bg-accent rounded-full blur-3xl animate-pulse"
-            style={{ animationDelay: "2s" }}
-          ></div>
+      {/* Geometric background patterns */}
+      <div className="absolute inset-0 z-0">
+        {/* Base gradient */}
+        <div className="absolute inset-0 bg-gradient-to-br from-[#0F172A] via-[#1E293B] to-[#0F172A]" />
+
+        {/* Hexagonal pattern */}
+        <div className="absolute inset-0 opacity-10">
+          <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNMzAgMEw1MiA0NUwzMCA5MEwwIDQ1WiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJyZ2JhKDU5LDEzMCwyNDYsMC4xKSIgc3Ryb2tlLXdpZHRoPSIxIi8+PC9zdmc+')] bg-repeat" />
         </div>
+
+        {/* Diagonal stripes */}
+        <div className="absolute inset-0 opacity-5">
+          <div className="absolute inset-0 bg-[repeating-linear-gradient(45deg,transparent,transparent_10px,rgba(59,130,246,0.1)_10px,rgba(59,130,246,0.1)_20px)]" />
+          <div className="absolute inset-0 bg-[repeating-linear-gradient(-45deg,transparent,transparent_10px,rgba(16,185,129,0.1)_10px,rgba(16,185,129,0.1)_20px)]" />
+        </div>
+
+        {/* Grid pattern */}
+        <div className="absolute inset-0 opacity-5">
+          <div className="absolute inset-0 bg-[linear-gradient(rgba(59,130,246,0.1)_1px,transparent_1px),linear-gradient(90deg,rgba(59,130,246,0.1)_1px,transparent_1px)] bg-[size:40px_40px]" />
+        </div>
+
+        {/* Radial gradient overlay */}
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(59,130,246,0.1),transparent_50%)]" />
       </div>
 
-      {/* Background image with overlay */}
-      <div className="absolute inset-0 z-0 opacity-40">
-        <Image
-          src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80"
-          alt="Business background"
-          fill
-          priority
-          className="object-cover"
-          // Placeholder image until replaced with actual image
-          onError={(e) => {
-            const target = e.target as HTMLImageElement;
-            target.style.backgroundColor = "#0f172a";
-            target.style.objectFit = "cover";
+      {/* Animated gradient orbs */}
+      <div className="absolute inset-0 opacity-20">
+        <motion.div
+          className="absolute w-[800px] h-[800px] -top-48 -left-48 bg-[#3B82F6]/10 rounded-full blur-3xl"
+          animate={{
+            scale: [1, 1.2, 1],
+            opacity: [0.3, 0.5, 0.3],
+          }}
+          transition={{
+            duration: 8,
+            repeat: Infinity,
+            ease: "easeInOut",
           }}
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-primary/60 via-primary/70 to-primary"></div>
+        <motion.div
+          className="absolute w-[800px] h-[800px] -bottom-48 -right-48 bg-[#10B981]/10 rounded-full blur-3xl"
+          animate={{
+            scale: [1.2, 1, 1.2],
+            opacity: [0.5, 0.3, 0.5],
+          }}
+          transition={{
+            duration: 8,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 1,
+          }}
+        />
       </div>
 
       {/* Content */}
@@ -78,65 +104,196 @@ const HeroSection = () => {
           variants={containerVariants}
           initial="hidden"
           animate={isLoaded ? "visible" : "hidden"}
-          className="mx-auto w-full max-w-3xl"
+          className="mx-auto w-full max-w-4xl"
         >
           {/* Logo */}
           <motion.div
             variants={itemVariants}
-            className="mx-auto w-40 h-40 relative mb-8"
+            className="mx-auto w-48 h-48 relative mb-8"
           >
-            <div className="w-40 h-40 glass-effect rounded-full flex items-center justify-center border-2 border-secondary">
-              <div className="text-4xl font-bold gradient-text">LOGO</div>
-            </div>
+            <motion.div
+              className="w-48 h-48 glass-effect rounded-full flex items-center justify-center border-2 border-[#3B82F6]/30 relative overflow-hidden"
+              variants={floatingAnimation}
+              animate="animate"
+            >
+              {/* Logo SVG */}
+              <svg
+                className="w-32 h-32"
+                viewBox="0 0 100 100"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                {/* Outer ring with tech pattern */}
+                <circle
+                  cx="50"
+                  cy="50"
+                  r="45"
+                  stroke="url(#gradient1)"
+                  strokeWidth="2"
+                  strokeDasharray="4 2"
+                  fill="none"
+                />
+
+                {/* Rotating segments */}
+                <g transform="rotate(0, 50, 50)">
+                  <path
+                    d="M50 5 L65 20 L65 35 L50 50 L35 35 L35 20 Z"
+                    stroke="url(#gradient2)"
+                    strokeWidth="1.5"
+                    fill="none"
+                  />
+                </g>
+                <g transform="rotate(60, 50, 50)">
+                  <path
+                    d="M50 5 L65 20 L65 35 L50 50 L35 35 L35 20 Z"
+                    stroke="url(#gradient2)"
+                    strokeWidth="1.5"
+                    fill="none"
+                  />
+                </g>
+                <g transform="rotate(120, 50, 50)">
+                  <path
+                    d="M50 5 L65 20 L65 35 L50 50 L35 35 L35 20 Z"
+                    stroke="url(#gradient2)"
+                    strokeWidth="1.5"
+                    fill="none"
+                  />
+                </g>
+
+                {/* Central core */}
+                <circle cx="50" cy="50" r="12" fill="url(#gradient3)" />
+                <circle cx="50" cy="50" r="8" fill="url(#gradient4)" />
+
+                {/* Energy rings */}
+                <circle
+                  cx="50"
+                  cy="50"
+                  r="25"
+                  stroke="url(#gradient5)"
+                  strokeWidth="0.5"
+                  fill="none"
+                  strokeDasharray="2 4"
+                />
+                <circle
+                  cx="50"
+                  cy="50"
+                  r="35"
+                  stroke="url(#gradient5)"
+                  strokeWidth="0.5"
+                  fill="none"
+                  strokeDasharray="2 4"
+                />
+
+                {/* Gradients */}
+                <defs>
+                  <linearGradient
+                    id="gradient1"
+                    x1="0"
+                    y1="0"
+                    x2="100"
+                    y2="100"
+                  >
+                    <stop offset="0%" stopColor="#3B82F6" />
+                    <stop offset="100%" stopColor="#10B981" />
+                  </linearGradient>
+                  <linearGradient
+                    id="gradient2"
+                    x1="0"
+                    y1="0"
+                    x2="100"
+                    y2="100"
+                  >
+                    <stop offset="0%" stopColor="#10B981" />
+                    <stop offset="100%" stopColor="#3B82F6" />
+                  </linearGradient>
+                  <radialGradient id="gradient3" cx="50%" cy="50%" r="50%">
+                    <stop offset="0%" stopColor="#3B82F6" />
+                    <stop offset="100%" stopColor="#10B981" />
+                  </radialGradient>
+                  <radialGradient id="gradient4" cx="50%" cy="50%" r="50%">
+                    <stop offset="0%" stopColor="#ffffff" />
+                    <stop offset="100%" stopColor="#3B82F6" />
+                  </radialGradient>
+                  <linearGradient
+                    id="gradient5"
+                    x1="0"
+                    y1="0"
+                    x2="100"
+                    y2="100"
+                  >
+                    <stop offset="0%" stopColor="#3B82F6" stopOpacity="0.5" />
+                    <stop offset="100%" stopColor="#10B981" stopOpacity="0.5" />
+                  </linearGradient>
+                </defs>
+              </svg>
+            </motion.div>
+          </motion.div>
+
+          {/* Launch Text */}
+          <motion.div variants={itemVariants} className="mb-4">
+            <span className="text-[#3B82F6] font-medium tracking-wider uppercase text-sm">
+              Welcome to the Future
+            </span>
           </motion.div>
 
           {/* Heading */}
           <motion.h1
             variants={itemVariants}
-            className="text-5xl md:text-7xl font-bold mb-6"
+            className="text-6xl md:text-8xl font-bold mb-6"
           >
-            <span className="gradient-text">Our Business</span>{" "}
-            <span className="text-white">Name</span>
+            <span className="bg-gradient-to-r from-[#3B82F6] via-[#10B981] to-[#3B82F6] bg-clip-text text-transparent">
+              Launching
+            </span>{" "}
+            <span className="text-white">Your Success</span>
           </motion.h1>
 
           {/* Subheading */}
           <motion.p
             variants={itemVariants}
-            className="text-xl md:text-2xl mb-10 max-w-2xl mx-auto text-gray-200"
+            className="text-2xl md:text-3xl mb-12 max-w-2xl mx-auto text-gray-300 font-light"
           >
-            Your compelling tagline goes here - Bringing innovation to your
-            world
+            Transform your business with cutting-edge solutions
           </motion.p>
 
-          {/* Buttons */}
+          {/* CTA Button */}
+          <motion.div variants={itemVariants} className="flex justify-center">
+            <motion.a
+              href="#contact"
+              className="group relative px-8 py-4 rounded-full bg-gradient-to-r from-[#3B82F6] to-[#10B981] text-white text-lg font-medium overflow-hidden"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <span className="relative z-10">Get Started Now</span>
+              <div className="absolute inset-0 bg-gradient-to-r from-[#10B981] to-[#3B82F6] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+            </motion.a>
+          </motion.div>
+
+          {/* Stats or Features */}
           <motion.div
             variants={itemVariants}
-            className="flex flex-col sm:flex-row gap-4 justify-center"
+            className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8 text-sm text-gray-400"
           >
-            <button onClick={scrollToAbout} className="btn-primary">
-              Learn More
-            </button>
-            <a href="#contact" className="btn-secondary">
-              Contact Us
-            </a>
+            <div>
+              <span className="text-[#3B82F6] font-semibold">24/7 Support</span>
+              <p className="mt-1">Always here to help you succeed</p>
+            </div>
+            <div>
+              <span className="text-[#10B981] font-semibold">Fast Setup</span>
+              <p className="mt-1">Get started in minutes, not days</p>
+            </div>
+            <div>
+              <span className="text-[#3B82F6] font-semibold">Scalable</span>
+              <p className="mt-1">Grows with your business</p>
+            </div>
           </motion.div>
-        </motion.div>
 
-        {/* Scroll indicator */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: isLoaded ? 1 : 0 }}
-          transition={{ duration: 0.8, delay: 1.5 }}
-          className="absolute bottom-8 left-1/2 transform -translate-x-1/2 cursor-pointer"
-          onClick={scrollToAbout}
-        >
+          {/* Powered by Savvy Software */}
           <motion.div
-            animate={{ y: [0, 10, 0] }}
-            transition={{ duration: 1.5, repeat: Infinity, repeatType: "loop" }}
-            className="flex flex-col items-center"
+            variants={itemVariants}
+            className="mt-16 text-sm text-gray-500"
           >
-            <span className="text-sm mb-2 text-gray-300">Scroll Down</span>
-            <FaArrowDown className="text-white text-xl" />
+            <span className="opacity-75">Powered by</span>{" "}
+            <span className="font-semibold text-[#3B82F6]">Savvy Software</span>
           </motion.div>
         </motion.div>
       </div>
