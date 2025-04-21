@@ -162,7 +162,7 @@ export default function Home() {
           className="text-center mb-16"
         >
           <h1 className="text-5xl pb-5f md:text-7xl font-bold text-white bg-clip-text text-transparent bg-gradient-to-r from-[#FFF4B7] to-[#006A67]">
-            Templates
+            Template Hub
           </h1>
           {/* <p className="text-gray-300 text-lg">
             Explore our interactive showcases
