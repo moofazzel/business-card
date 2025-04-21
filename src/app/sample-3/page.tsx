@@ -251,147 +251,33 @@ export default function ComingSoonPage() {
     },
   };
 
-  // Enhanced background animation variants
-  const backgroundVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        duration: 1,
-        staggerChildren: 0.2,
-      },
-    },
-  };
-
-  const diagonalVariants = {
-    hidden: { opacity: 0, scaleX: 0.8 },
-    visible: {
-      opacity: 1,
-      scaleX: 1,
-      transition: {
-        duration: 1.5,
-        ease: "easeOut",
-      },
-    },
-  };
-
-  const cityScapeVariants = {
-    hidden: { opacity: 0, y: 50 },
-    visible: {
-      opacity: 0.15,
-      y: 0,
-      transition: {
-        duration: 2,
-        ease: "easeOut",
-      },
-    },
-  };
-
-  const gridVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: [0.1, 0.15, 0.1],
-      transition: {
-        duration: 5,
-        repeat: Infinity,
-        ease: "linear",
-      },
-    },
-  };
-
   return (
     <div className="min-h-screen w-full relative overflow-hidden bg-[#1a1f36]">
-      {/* Animated Background Container */}
+      {/* Animated Background */}
       <motion.div
-        variants={backgroundVariants}
-        initial="hidden"
-        animate="visible"
-        className="absolute inset-0"
+        initial={{ backgroundPosition: "0% 0%" }}
+        animate={{
+          backgroundPosition: ["0% 0%", "100% 100%", "0% 0%"],
+        }}
+        transition={{
+          duration: 30,
+          repeat: Infinity,
+          repeatType: "reverse",
+          ease: "linear",
+        }}
+        className="absolute inset-0 bg-gradient-to-br from-[#1a1f36] via-[#2a3a7c] to-[#0f1d3b] z-0"
       >
-        {/* Base Gradient */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{
-            opacity: 1,
-            background: [
-              "linear-gradient(135deg, #1a1f36 0%, #2a3a7c 50%, #1a1f36 100%)",
-              "linear-gradient(135deg, #1a1f36 50%, #2a3a7c 100%, #1a1f36 150%)",
-              "linear-gradient(135deg, #1a1f36 0%, #2a3a7c 50%, #1a1f36 100%)",
-            ],
-          }}
-          transition={{
-            duration: 10,
-            repeat: Infinity,
-            ease: "linear",
-          }}
-          className="absolute inset-0"
-        />
-
-        {/* Animated Grid Pattern */}
-        <motion.div
-          variants={gridVariants}
-          className="absolute inset-0"
-          style={{
-            backgroundImage: `linear-gradient(#ffffff 1px, transparent 1px),
-              linear-gradient(90deg, #ffffff 1px, transparent 1px)`,
-            backgroundSize: "50px 50px",
-            transform: "perspective(500px) rotateX(60deg)",
-            opacity: 0.05,
-          }}
-        />
-
         {/* Diagonal Overlay */}
-        <motion.div
-          variants={diagonalVariants}
+        <div
           className="absolute inset-0"
           style={{
             background:
               "linear-gradient(135deg, rgba(26, 31, 54, 0.9) 55%, transparent 55%)",
-            clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)",
+            zIndex: 1,
           }}
         />
 
-        {/* City Silhouette */}
-        <motion.div
-          variants={cityScapeVariants}
-          className="absolute bottom-0 right-0 w-1/2 h-2/3"
-          style={{
-            backgroundImage:
-              'url(\'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000" preserveAspectRatio="none"%3E%3Cpath d="M0 1000h50l25-100h25l25 100h100l50-200h25l25 200h100l50-300h25l25 300h100l50-400h25l25 400h100l50-500h25l25 500h100V1000H0z" fill="%23ff6600"%3E%3C/path%3E%3C/svg%3E\')',
-            backgroundRepeat: "no-repeat",
-            backgroundPosition: "bottom right",
-            backgroundSize: "contain",
-            opacity: 0.1,
-          }}
-        />
-
-        {/* Animated Particles */}
-        <motion.div className="absolute inset-0">
-          {Array.from({ length: 20 }).map((_, i) => (
-            <motion.div
-              key={i}
-              className="absolute w-1 h-1 bg-white rounded-full"
-              initial={{
-                opacity: Math.random() * 0.5 + 0.3,
-                x: Math.random() * 100 + "%",
-                y: Math.random() * 100 + "%",
-              }}
-              animate={{
-                opacity: [0.3, 0.8, 0.3],
-                scale: [1, 1.5, 1],
-                y: ["-100%", "200%"],
-              }}
-              transition={{
-                duration: Math.random() * 5 + 5,
-                repeat: Infinity,
-                ease: "linear",
-                delay: Math.random() * 5,
-              }}
-            />
-          ))}
-        </motion.div>
-
-        {/* Glowing Orbs */}
+        {/* Cinematic floating shapes */}
         <motion.div
           initial="hidden"
           animate="visible"
@@ -413,19 +299,6 @@ export default function ComingSoonPage() {
           variants={floatingVariants}
           transition={{ delay: 1 }}
           className="absolute top-[40%] left-[10%] w-32 h-32 rounded-full bg-[#ff8833] opacity-15 blur-xl"
-        />
-
-        {/* Scanlines Effect */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: [0.02, 0.04, 0.02] }}
-          transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
-          className="absolute inset-0 pointer-events-none"
-          style={{
-            backgroundImage:
-              "linear-gradient(0deg, rgba(255,255,255,0.1) 1px, transparent 1px)",
-            backgroundSize: "100% 3px",
-          }}
         />
       </motion.div>
 
