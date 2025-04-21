@@ -1,0 +1,5 @@
+Place your images here:
+
+1. hero-bg.jpg - Background image for the hero section
+2. about-image.jpg - Image for the about section
+3. your-logo.png - Your business logo 
