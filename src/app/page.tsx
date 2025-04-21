@@ -79,12 +79,24 @@ export default function Home() {
       category: "Jui",
       icon: <FaRocket className="text-2xl" />,
     },
+    {
+      name: "Jui 2",
+      path: "https://ivey-template.vercel.app/",
+      category: "Jui",
+      icon: <FaRocket className="text-2xl" />,
+    },
     //Nowrin
 
     // Tonmoy
     {
       name: "Tonmoy 1",
       path: "https://business-card-fawn.vercel.app/",
+      category: "Tonmoy",
+      icon: <FaRocket className="text-2xl" />,
+    },
+    {
+      name: "Tonmoy 2",
+      path: "https://ivey-landing.vercel.app/",
       category: "Tonmoy",
       icon: <FaRocket className="text-2xl" />,
     },
